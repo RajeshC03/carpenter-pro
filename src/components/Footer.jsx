@@ -1,7 +1,16 @@
+import { useState } from 'react'
 import { PHONE, PHONE_SHOW, MAP_QUERY } from '../data/content'
 
 export default function Footer({ t }) {
   const q = encodeURIComponent(MAP_QUERY)
+
+  const [hint, setHint] = useState(false)
+const notify = () => {
+  setHint(true)
+  setTimeout(() => setHint(false), 3500)   // highlight lasts 3.5 seconds
+}
+
+
   return (
     <footer className="reveal" id="visit">
       <img className="flogo" src="/images/logo.png" alt="" />
@@ -10,11 +19,18 @@ export default function Footer({ t }) {
       <div>📞 <a href={`tel:+${PHONE}`}>{PHONE_SHOW}</a></div>
       <div className="visit">
         <div className="visit-title"><span className="pin">📌</span> {t.visit}</div>
+        {/* <div className="map-frame">
+          <iframe title="Shop location" loading="lazy" src={`https://www.google.com/maps?q=${q}&output=embed`} />
+        </div> */}
         <div className="map-frame">
           <iframe title="Shop location" loading="lazy" src={`https://www.google.com/maps?q=${q}&output=embed`} />
+          <div className="map-cover" onClick={notify} />
         </div>
+        {hint && <div className="tap-hint">{t.tapHint}</div>}
         <div className="map-btns">
-          <a className="btn g" target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${q}`}>🗺️ {t.viewMap}</a>
+          {/* <a className="btn g" target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${q}`}>🗺️ {t.viewMap}</a> */}
+          <a className={'btn g' + (hint ? ' hl' : '')} target="_blank" rel="noopener noreferrer"
+   href={`https://www.google.com/maps/search/?api=1&query=${q}`}>🗺️ {t.viewMap}</a>
           <a className="btn b" target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${q}`}>🧭 {t.directions}</a>
         </div>
       </div>
