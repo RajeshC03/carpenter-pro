@@ -18,7 +18,7 @@ export default function Footer({ t }) {
           <a className="btn b" target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${q}`}>🧭 {t.directions}</a>
         </div>
       </div>
-      <small>© {new Date().getFullYear()} {t.title}</small>
+      <small>© {new Date().getFullYear()} {t.built}</small>
     </footer>
   )
 }
